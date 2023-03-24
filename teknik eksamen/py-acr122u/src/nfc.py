@@ -6,19 +6,19 @@ from src import utils, option, error
 
 
 class Reader:
-    def __init__(self):
+    def __init__(self, index):
         """create an ACR122U object
         doc available here: http://downloads.acs.com.hk/drivers/en/API-ACR122U-2.02.pdf"""
-        self.reader_name, self.connection = self.instantiate_reader()
+        self.reader_name, self.connection = self.instantiate_reader(index)
 
     @staticmethod
-    def instantiate_reader():
+    def instantiate_reader(index):
         readers = smartcard.System.readers()
 
         if len(readers) == 0:
             raise error.NoReader("No readers available")
 
-        reader = readers[0]
+        reader = readers[index]
         c = reader.createConnection()
 
         try:
@@ -65,7 +65,7 @@ class Reader:
         if [sw1, sw2] == option.answers.get("fail"):
             raise error.InstructionFailed(f"Instruction {mode} failed")
 
-        print(f"success: {mode}")
+        #print(f"success: {mode}")
         if data:
             return data
 
@@ -199,12 +199,16 @@ class Reader:
         card_name = historical_byte[-17:-12]
         name = option.cards.get(card_name, "")
         print(f"Card Name: {name}\n\tT0 {atr.isT0Supported()}\n\tT1 {atr.isT1Supported()}\n\tT1 {atr.isT15Supported()}")
-
+    
     @staticmethod
     def print_data(data):
         print(f"data:\n\t{data}"
               f"\n\t{utils.int_list_to_hexadecimal_list(data)}"
               f"\n\t{utils.int_list_to_string_list(data)}")
+    
+    @staticmethod
+    def get_data(data):
+        return data
 
     @staticmethod
     def print_sw1_sw2(sw1, sw2):
