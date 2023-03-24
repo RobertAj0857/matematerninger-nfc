@@ -1,6 +1,8 @@
 # import ndef
 # from ndef.message import message_encoder, message_decoder
 # import nfc
+
+#epic
 from src import nfc
 from threading import Thread
 import time
