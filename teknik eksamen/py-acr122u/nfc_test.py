@@ -34,25 +34,30 @@ def compare_id(list_in, id_in):
 
 while(1):
     time.sleep(0.1)
-    try:
-        reader0 = nfc.Reader(0)
-        readerData0 = reader0.get_data(reader0.get_uid())
-        print(readerData0, "reader0")
-    except:
-        ""
-    try:
-        reader1 = nfc.Reader(1)
-        readerData1 = reader1.get_data(reader1.get_uid())
-        print(readerData1, "reader1")
-    except:
-        ""
-    try:
-        reader2 = nfc.Reader(2)
-        readerData2 = reader2.get_data(reader2.get_uid())
-        print(parse_data(readerData2), "reader2")
+    readers = []
+    for reader in nfc.Reader.get_all_readers():
+        readers.append(reader)
+    for reader in readers:
+        reader.print_data(reader.get_uid())
+    # try:
+    #     reader0 = nfc.Reader(0)
+    #     readerData0 = reader0.get_data(reader0.get_uid())
+    #     print(readerData0, "reader0")
+    # except:
+    #     ""
+    # try:
+    #     reader1 = nfc.Reader(1)
+    #     readerData1 = reader1.get_data(reader1.get_uid())
+    #     print(readerData1, "reader1")
+    # except:
+    #     ""
+    # try:
+    #     reader2 = nfc.Reader(2)
+    #     readerData2 = reader2.get_data(reader2.get_uid())
+    #     print(parse_data(readerData2), "reader2")
         
         
-    except:
-        ""
+    # except:
+    #     ""
 
 
