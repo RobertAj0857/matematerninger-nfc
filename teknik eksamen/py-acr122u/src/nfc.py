@@ -30,6 +30,9 @@ class Reader:
 
         return reader, c
 
+    def get_all_readers():
+        return smartcard.System.readers()
+
     def command(self, mode, arguments=None):
         """send a payload to the reader
 
