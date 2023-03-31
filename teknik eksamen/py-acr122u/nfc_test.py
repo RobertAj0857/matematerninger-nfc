@@ -1,11 +1,3 @@
-# import ndef
-# from ndef.message import message_encoder, message_decoder
-# import nfc
-
-#reader0-2, left to right
-
-#epic
-
 data_list = [[0,0],[0,0],[0,0]]
 from src import nfc
 from threading import Thread
@@ -57,11 +49,11 @@ def parse_data(data_in, position_in):
     dice_number = compare_id(dice_table, dice_id)
     return [dice_number, position]
 
+
 def remap_position(original_position, position_map):
     if len(position_map) != 3:
         print("original position: " ,original_position)
         return original_position
-
     else:
         mapped_position = position_map.index(original_position) + 1
         print("original position: " ,original_position)
@@ -71,7 +63,7 @@ checked_indexes = [0,1,2]
 def calibrate(list_in):
     ""
     if len(calibrated_order) == 3:
-        #print("calibrated!")
+
         return calibrated_order
     calibrated = False
     if not calibrated:
@@ -80,22 +72,6 @@ def calibrate(list_in):
                 calibrated_order.append(list_in[i][1])
                 checked_indexes.remove(i)
         print(calibrated_order)
-    
-        
-
-   # print(calibrated_list)
-
-    #brug master kort
-    #check for alle læsere
-    #læs log
-    #første entry bliver første i lsit calibrated_order
-    #anden, anden
-    #tredje,, tredje
-    #når en aflæst og sat i liste, bliver der ikke lyttet mere på den
-    #når alle er aflæst gås der til normal mode
-
-
-
 
 
 while(1):
