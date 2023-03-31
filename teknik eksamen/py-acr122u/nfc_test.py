@@ -53,9 +53,19 @@ def compare_id(list_in, id_in):
 
 def parse_data(data_in, position_in):
     dice_id = data_in
-    position = position_in
+    position = remap_position(position_in, calibrated_order)
     dice_number = compare_id(dice_table, dice_id)
     return [dice_number, position]
+
+def remap_position(original_position, position_map):
+    if len(position_map) != 3:
+        print("original position: " ,original_position)
+        return original_position
+
+    else:
+        mapped_position = position_map.index(original_position) + 1
+        print("original position: " ,original_position)
+        return mapped_position
 
 checked_indexes = [0,1,2]
 def calibrate(list_in):
